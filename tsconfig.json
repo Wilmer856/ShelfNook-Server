@@ -5,9 +5,11 @@
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
       "strict": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "resolveJsonModule": true
     },
     "display": "Recommended",
     "$schema": "https://json.schemastore.org/tsconfig",
-    "extends": "@tsconfig/recommended/tsconfig.json"
+    "extends": "@tsconfig/recommended/tsconfig.json",
+    "include": ["src/**/*.ts", "src/types/**/*.d.ts"]
   }
