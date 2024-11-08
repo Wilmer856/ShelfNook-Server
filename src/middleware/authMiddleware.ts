@@ -31,17 +31,6 @@ const authenticate: RequestHandler = async (req: RequestWithUser, res: Response,
             res.status(401).send("User can't be authenticated");
           }
     }
-    //  try {
-    //     const decodedToken = await admin.auth().verifyIdToken(token);
-    //     req.user = {
-    //         uid: decodedToken.uid,
-    //         email: decodedToken.email || '',
-    //         ...Object.fromEntries(Object.entries(decodedToken).filter(([key]) => !['uid', 'email'].includes(key))),
-    //     };
-    //     next();
-    // } catch (error) {
-    //     return res.status(401).send("User can't be authenticated");
-    // }
     handleTokenVerification();
 };
 
