@@ -1,11 +1,16 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "@sequelize/core";
-import { Attribute, AutoIncrement, NotNull, PrimaryKey} from "@sequelize/core/decorators-legacy";
+import { Attribute, AutoIncrement, NotNull, PrimaryKey, Unique} from "@sequelize/core/decorators-legacy";
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     @Attribute(DataTypes.INTEGER)
     @PrimaryKey
     @AutoIncrement
     declare user_id: CreationOptional<Number>;
+
+    @Attribute(DataTypes.STRING)
+    @NotNull
+    @Unique
+    declare firebase_uid: string
 
     @Attribute(DataTypes.STRING)
     @NotNull
@@ -19,6 +24,6 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare createdAt: CreationOptional<Date>
 
     @Attribute(DataTypes.STRING)
-    declare profilePicture : string
+    declare profilePicture : CreationOptional<String>
 
 }

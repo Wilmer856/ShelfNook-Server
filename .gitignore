@@ -33,6 +33,8 @@ npm-debug.log
 
 .env
 
+.prettierignore
+
 config/
 
 generateToken.js
