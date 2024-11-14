@@ -6,13 +6,13 @@ import userRoutes from "./routes/userRoutes";
 
 dotenv.config();
 
-export interface RequestWithUser extends Request {
-  user?: {
-    uid: string;
-    email?: string;
-    [key: string]: any;
-  };
-}
+// export interface RequestWithUser extends Request {
+//   user?: {
+//     uid: string;
+//     email?: string;
+//     [key: string]: any;
+//   };
+// }
 
 const app = express();
 const port = 3000;
@@ -30,7 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Sync database
 sequelize
-  .sync() // `force: true` drops tables each time; use cautiously
+  .sync({force:true}) // `force: true` drops tables each time; use cautiously
   .then(() => {
     console.log("Database synced!");
     //listen for requests

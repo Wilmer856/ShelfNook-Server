@@ -8,7 +8,7 @@ interface RequestWithUser extends Request {
       email?: string;
       [key: string]: any;
     };
-  }
+}
 
 const authenticate: RequestHandler = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(' ')[1];

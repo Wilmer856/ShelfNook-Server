@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
+import { RequestWithUser } from "../types/express";
 
-export const getUsers = async (req: Request, res: Response) => {
+export const getUsers = async (req: RequestWithUser, res: Response): Promise<void> => {
   try {
     const users = await User.findAll();
     res.json(users);
@@ -10,9 +11,9 @@ export const getUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const getUser = async (req: Request, res: Response) => {
+export const getUser = async (req: RequestWithUser, res: Response): Promise<void> => {
   try {
-    const firebaseUserId = req.user?.firebaseUserId;
+    const firebaseUserId = req.user?.uid;
     const user = await User.findOne({where: {firebase_uid: firebaseUserId}});
     if (!user) {
       res.status(404).json({ error: "User not found" });
@@ -25,7 +26,7 @@ export const getUser = async (req: Request, res: Response) => {
 };
 
 //User creation handled in client with Firebase SDK
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: RequestWithUser, res: Response): Promise<void> => {
   try {
     const { uid, email, username} = req.body
     // Save user in database
@@ -40,9 +41,9 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: RequestWithUser, res: Response): Promise<void> => {
   try {
-    const firebaseUserId = req.user?.firebaseUserId;
+    const firebaseUserId = req.user?.uid;
     const user = await User.findOne({where: {firebase_uid: firebaseUserId}});
 
     if (!user) {
@@ -56,9 +57,9 @@ export const updateUser = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: RequestWithUser, res: Response): Promise<void> => {
   try {
-    const firebaseUserId = req.user?.firebaseUserId;
+    const firebaseUserId = req.user?.uid;
     const user = await User.findOne({where: {firebase_uid: firebaseUserId}});
     if (!user) {
       res.status(404).json({ error: "User not found" });
