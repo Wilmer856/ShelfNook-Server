@@ -5,10 +5,14 @@ import {
   getUser,
   getUsers,
   updateUser,
+  searchUsers
 } from "../controllers/userController";
 import authenticate from "../middleware/authMiddleware";
 
 const userRoutes = Router();
+
+//search route
+userRoutes.get("/search", searchUsers);
 
 userRoutes.get("/", getUsers);
 

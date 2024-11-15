@@ -30,7 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Sync database
 sequelize
-  .sync({force:true}) // `force: true` drops tables each time; use cautiously
+  .sync() // `force: true` drops tables each time; use cautiously
   .then(() => {
     console.log("Database synced!");
     //listen for requests
