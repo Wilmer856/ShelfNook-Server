@@ -12,7 +12,7 @@ export default class UserBookCollections extends Model<InferAttributes<UserBookC
     declare book: number
 
     @Attribute(DataTypes.BOOLEAN)
-    declare isFavorite: boolean
+    declare isFavorite: CreationOptional<boolean>
 
     @Attribute(DataTypes.STRING)
     declare status: string

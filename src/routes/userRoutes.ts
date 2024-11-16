@@ -20,6 +20,8 @@ userRoutes.get("/:id", authenticate, getUser);
 
 userRoutes.post("/register", createUser);
 
+userRoutes.post("/login", loginUser);
+
 userRoutes.put("/:id", authenticate, updateUser);
 
 userRoutes.delete("/:id", authenticate, deleteUser);

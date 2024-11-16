@@ -3,6 +3,7 @@ import authenticate from "./middleware/authMiddleware";
 import * as dotenv from "dotenv";
 import sequelize from "./database";
 import userRoutes from "./routes/userRoutes";
+import bookRoutes from "./routes/bookRoutes";
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.use(express.json());
 
 //routes
 app.use("/user", userRoutes);
+
+app.use("/book", bookRoutes)
 
 // Error handler
 app.use((req: Request, res: Response, next: NextFunction) => {

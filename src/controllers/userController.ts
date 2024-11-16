@@ -3,6 +3,7 @@ import { User } from "../models/User";
 import { RequestWithUser } from "../types/express";
 import redisClient from "../config/redis";
 import elasticClient from "../config/elasticsearch";
+import admin from "../firebaseConfig";
 
 export const getUsers = async (req: RequestWithUser, res: Response): Promise<void> => {
   try {
@@ -71,6 +72,33 @@ export const createUser = async (req: RequestWithUser, res: Response): Promise<v
     res.status(201).json({ message: "User registered successfully", user });
   } catch (error) {
     res.status(500).json({ error: "Error creating user" });
+  }
+};
+
+export const loginUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      res.status(400).json({ error: "Email and password are required" });
+      return;
+    }
+
+    // Use Firebase Admin SDK to verify user credentials
+    const user = await admin.auth().getUserByEmail(email);
+
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    // If credentials are valid, generate a Firebase token
+    const token = await admin.auth().createCustomToken(user.uid);
+
+    res.status(200).json({ message: "Login successful", token });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ error: "Error during login" });
   }
 };
 

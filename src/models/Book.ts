@@ -6,7 +6,10 @@ export class Book extends Model<InferAttributes<Book>, InferCreationAttributes<B
     @PrimaryKey
     @AutoIncrement
     declare book_id: CreationOptional<Number>;
-    
+
+    @Attribute(DataTypes.STRING)
+    declare google_books_id: string
+
     @Attribute(DataTypes.STRING)
     @NotNull
     declare title: string
@@ -20,13 +23,7 @@ export class Book extends Model<InferAttributes<Book>, InferCreationAttributes<B
 
     @Attribute(DataTypes.INTEGER)
     declare publishedYear: Number
-    
-    @Attribute(DataTypes.STRING)
-    declare description: string
 
     @Attribute(DataTypes.STRING)
-    declare coverImage: string
-    
-    @Attribute(DataTypes.STRING)
-    declare averageRating: number
+    declare description: string
 }
